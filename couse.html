@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Categorized Course Lists</title>
+</head>
+<body>
+
+    <h2>Programming Languages</h2>
+    <select name="programming" id="programming">
+        <option value="">-- Select a Language --</option>
+        <option value="c">C</option>
+        <option value="cpp">C++</option>
+        <option value="java">Java</option>
+        <option value="python">Python</option>
+    </select>
+
+    <h2>Data Structures</h2>
+    <input list="data-structures"
+           id="dataStructure"
+           name="dataStructure"
+           placeholder="Choose a data structure">
+
+    <datalist id="data-structures">
+        <option value="A. Array">
+        <option value="B. Linked List">
+        <option value="C. Stack">
+        <option value="D. Queue">
+    </datalist>
+
+    <h2>Software Engineering Topics</h2>
+
+    <select name="software" id="software">
+        <option value="">-- Select a Topic --</option>
+        <option value="sdlc">101. SDLC</option>
+        <option value="agile">102. Agile Model</option>
+        <option value="waterfall">103. Waterfall Model</option>
+        <option value="uml">104. UML Diagrams</option>
+        <option value="testing">105. Testing Techniques</option>
+    </select>
+
+</body>
+</html>

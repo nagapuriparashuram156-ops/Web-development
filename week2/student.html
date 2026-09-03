@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Student Registration Form</title>
+  <style>
+    :root{--bg:#f4f7fb;--card:#ffffff;--accent:#2563eb;--muted:#6b7280;--success:#16a34a}
+    *{box-sizing:border-box}
+    body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial;line-height:1.4;background:linear-gradient(180deg, #f7fbff 0%, var(--bg) 100%);color:#111827;padding:32px}
+    .container{max-width:900px;margin:0 auto;background:var(--card);border-radius:12px;box-shadow:0 6px 24px rgba(2,6,23,0.08);overflow:hidden}
+    header{padding:28px 32px;border-bottom:1px solid #eef2f7}
+    header h1{margin:0;font-size:20px}
+    header p{margin:6px 0 0;color:var(--muted);font-size:14px}
+    form{padding:28px 32px}
+    .pages{position:relative}
+    .form-page{display:none;animation:fade .22s ease-in-out}
+    .form-page.active{display:block}
+    .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+    .full{grid-column:1/-1}
+    label{display:block;font-size:13px;color:#374151;margin-bottom:6px}
+    input[type=text],input[type=email],input[type=tel],input[type=date],input[type=number],select,textarea{width:100%;padding:10px 12px;border:1px solid #e6eef7;border-radius:8px;background:#fff;font-size:14px;color:#0f172a}
+    textarea{min-height:90px;resize:vertical}
+    .actions{display:flex;gap:12px;justify-content:flex-end;margin-top:18px}
+    button{cursor:pointer;border:0;padding:10px 16px;border-radius:8px;font-weight:600}
+    .btn-primary{background:var(--accent);color:#fff}
+    .btn-secondary{background:#eef2ff;color:var(--accent);border:1px solid rgba(37,99,235,0.12)}
+    .btn-muted{background:#f3f4f6;color:#374151}
+    .helper{font-size:13px;color:var(--muted);margin-top:6px}
+    .progress{display:flex;gap:8px;align-items:center;margin-top:10px}
+    .step{flex:1;height:8px;border-radius:99px;background:#eef2f7}
+    .step.active{background:linear-gradient(90deg,var(--accent),#60a5fa)}
+    .summary{padding:18px;border-radius:8px;background:#f8fafc;border:1px solid #eef2f7;margin-top:12px}
+    .success{display:none;padding:18px;border-radius:8px;background:#ecfdf5;color:var(--success);border:1px solid rgba(16,185,129,0.12);margin-top:12px}
+    @keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+    @media (max-width:700px){.grid{grid-template-columns:1fr}.container{margin:12px}}
+  </style>
+</head>
+<body>
+  <div class="container" role="main">
+    <header>
+      <h1>Student Registration</h1>
+      <p>Complete the form to register. Use the Next and Back buttons to navigate between sections.</p>
+      <div class="progress" aria-hidden="true">
+        <div class="step step-1 active"></div>
+        <div class="step step-2"></div>
+      </div>
+    </header>
+
+    <form id="regForm" novalidate>
+      <div class="pages">
+        <section class="form-page active" data-page="1">
+          <div class="grid">
+            <div>
+              <label for="fullname">Full Name</label>
+              <input id="fullname" name="fullname" type="text" required maxlength="100" autocomplete="name" />
+            </div>
+            <div>
+              <label for="dob">Date of Birth</label>
+              <input id="dob" name="dob" type="date" required />
+            </div>
+
+            <div>
+              <label for="gender">Gender</label>
+              <select id="gender" name="gender" required>
+                <option value="">Choose...</option>
+                <option>Female</option>
+                <option>Male</option>
+                <option>Non-binary</option>
+                <option>Prefer not to say</option>
+                <option>Other</option>
+              </select>
+            </div>
+            <div>
+              <label for="email">Email</label>
+              <input id="email" name="email" type="email" required autocomplete="email" />
+            </div>
+
+            <div>
+              <label for="phone">Phone Number</label>
+              <input id="phone" name="phone" type="tel" required pattern="^[0-9+\-() ]{7,20}$" placeholder="e.g. +91 9876543210" />
+            </div>
+            <div class="full">
+              <label for="address">Address</label>
+              <textarea id="address" name="address" required maxlength="300" placeholder="Street, City, State, PIN"></textarea>
+            </div>
+          </div>
+
+          <div class="actions">
+            <button type="button" class="btn-muted" disabled>Previous</button>
+            <button type="button" class="btn-primary" id="nextBtn">Next</button>
+          </div>
+        </section>
+
+        <section class="form-page" data-page="2">
+          <div class="grid">
+            <div>
+              <label for="qualification">Highest Qualification</label>
+              <select id="qualification" name="qualification" required>
+                <option value="">Choose...</option>
+                <option>High School</option>
+                <option>Diploma</option>
+                <option>Bachelor's</option>
+                <option>Master's</option>
+                <option>PhD</option>
+                <option>Other</option>
+              </select>
+            </div>
+            <div>
+              <label for="school">School / College Name</label>
+              <input id="school" name="school" type="text" required maxlength="150" />
+            </div>
+
+            <div>
+              <label for="course">Course / Branch</label>
+              <input id="course" name="course" type="text" required maxlength="100" />
+            </div>
+            <div>
+              <label for="year">Year of Passing</label>
+              <input id="year" name="year" type="number" required min="1900" max="2100" />
+            </div>
+
+            <div>
+              <label for="score">Percentage / CGPA</label>
+              <input id="score" name="score" type="number" required step="0.01" min="0" max="100" />
+            </div>
+            <div>
+              <label for="board">University / Board</label>
+              <input id="board" name="board" type="text" required maxlength="150" />
+            </div>
+          </div>
+
+          <div class="actions">
+            <button type="button" class="btn-secondary" id="backBtn">Back</button>
+            <button type="reset" class="btn-muted">Reset</button>
+            <button type="submit" class="btn-primary">Submit</button>
+          </div>
+
+          <div class="success" id="successMsg" role="status">
+            Registration submitted successfully.
+          </div>
+        </section>
+      </div>
+    </form>
+  </div>
+
+  <script>
+    const form=document.getElementById('regForm');
+    const pages=[...document.querySelectorAll('.form-page')];
+    const nextBtn=document.getElementById('nextBtn');
+    const backBtn=document.getElementById('backBtn');
+    const successMsg=document.getElementById('successMsg');
+    function showPage(index){
+      pages.forEach((p,i)=>{p.classList.toggle('active',i===index)});
+      document.querySelectorAll('.step').forEach((s,i)=>s.classList.toggle('active',i<=index));
+      successMsg.style.display='none';
+    }
+    nextBtn.addEventListener('click',()=>{
+      const page1Fields=pages[0].querySelectorAll('input,select,textarea');
+      for(const el of page1Fields){
+        if(!el.checkValidity()){
+          el.reportValidity();
+          return;
+        }
+      }
+      showPage(1);
+      window.scrollTo({top:0,behavior:'smooth'});
+    });
+    backBtn.addEventListener('click',()=>{
+      showPage(0);
+      window.scrollTo({top:0,behavior:'smooth'});
+    });
+    form.addEventListener('submit',e=>{
+      e.preventDefault();
+      const page2Fields=pages[1].querySelectorAll('input,select,textarea');
+      for(const el of page2Fields){
+        if(!el.checkValidity()){
+          el.reportValidity();
+          return;
+        }
+      }
+      const data=new FormData(form);
+      const values=Object.fromEntries(data.entries());
+      successMsg.style.display='block';
+      successMsg.textContent='Registration submitted successfully. Thank you, '+(values.fullname||'')+'.';
+      form.reset();
+      showPage(0);
+    });
+    document.addEventListener('DOMContentLoaded',()=>{showPage(0)});
+  </script>
+</body>
+</html>
